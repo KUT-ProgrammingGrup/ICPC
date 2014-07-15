@@ -23,19 +23,8 @@ struct pars : qi::grammar<Iterator, int(), qi::locals<que>>
 		using boost::phoenix::bind;
 		using namespace qi::labels;
 
-<<<<<<< HEAD
-		start =  +('[' >> qi::int_[boost::phoenix::bind(
-			[](auto const& l, auto const& r)
-			{
-				return l.push(r);
-			}
-			, _a
-			, _1)] >> ']')
-			| +('[' >> start[push_back(at_c<0>(_val), _1)] >> ']');
-=======
-		start = (+('[' >> qi::int_[bind([](auto &q, auto const &i){q.push((i + 1) / 2);}, _a, _1)] >> ']')
-			| +('[' >> start[bind([](auto &q, auto const &i){q.push(i);}, _a, _1)] >> ']')
-			)[_val = bind([](auto &q)
+		const auto f_push = [](auto &q, auto const &i){q.push(i);};
+		const auto f_pop = [](auto &q)
 			{
 				int sum = 0;
 				for (auto i = (q.size() + 1) / 2; i > 0; i--)
@@ -44,8 +33,11 @@ struct pars : qi::grammar<Iterator, int(), qi::locals<que>>
 					q.pop();
 				}
 				return sum;
-			}, _a)];
->>>>>>> origin/master
+			};
+
+		start = (+('[' >> qi::int_[bind(f_push, _a, (_1 + 1) / 2)] >> ']')
+			| +('[' >> start[bind(f_push, _a, _1)] >> ']')
+			)[_val = bind(f_pop, _a)];
 	}
 };
 
