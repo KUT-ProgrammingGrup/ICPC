@@ -8,3 +8,10 @@ Release
 a.out
 *.o
 *.exe
+
+# Java
+*.class
+
+# Windows
+desktop.ini
+Thumbs.db
