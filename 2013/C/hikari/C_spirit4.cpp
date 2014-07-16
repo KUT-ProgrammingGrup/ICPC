@@ -11,6 +11,7 @@ namespace phoenix = boost::phoenix;
 
 int main()
 {
+	// BNF  start ::= ("[" (integer | start) "]")+
 	qi::rule<std::string::iterator, int()> start = (+('[' >> (qi::int_[qi::_1 = (qi::_1 + 1) / 2] | start) >> ']'))[
 		phoenix::partial_sort(qi::_1, phoenix::begin(qi::_1) + (phoenix::size(qi::_1) + 1) / 2),
 		phoenix::erase(qi::_1, phoenix::begin(qi::_1) + (phoenix::size(qi::_1) + 1) / 2, phoenix::end(qi::_1)),
