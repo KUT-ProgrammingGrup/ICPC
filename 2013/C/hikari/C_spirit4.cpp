@@ -1,4 +1,4 @@
-// C_spirit3.cpp
+// C_spirit4.cpp
 // hikari
 
 #include <iostream>
