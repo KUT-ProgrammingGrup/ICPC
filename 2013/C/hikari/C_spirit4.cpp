@@ -7,14 +7,14 @@
 #include <boost/spirit/include/phoenix.hpp>
 
 namespace qi = boost::spirit::qi;
-namespace ph = boost::phoenix;
+namespace phoenix = boost::phoenix;
 
 int main()
 {
-	qi::rule<std::string::iterator, int()> start = ( +('[' >> ( qi::int_[ qi::_1 = ( qi::_1 + 1 ) / 2 ] | start ) >> ']') )[
-		ph::partial_sort( qi::_1, ph::begin( qi::_1 ) + ( ph::size( qi::_1 ) + 1 ) / 2),
-		ph::erase( qi::_1, ph::begin( qi::_1 ) + ( ph::size( qi::_1 ) + 1) / 2, ph::end( qi::_1 )),
-		qi::_val = ph::accumulate( qi::_1, 0 ) ];
+	qi::rule<std::string::iterator, int()> start = (+('[' >> (qi::int_[qi::_1 = (qi::_1 + 1) / 2] | start) >> ']'))[
+		phoenix::partial_sort(qi::_1, phoenix::begin(qi::_1) + (phoenix::size(qi::_1) + 1) / 2),
+		phoenix::erase(qi::_1, phoenix::begin(qi::_1) + (phoenix::size(qi::_1) + 1) / 2, phoenix::end(qi::_1)),
+		qi::_val = phoenix::accumulate(qi::_1, 0)];
 
 	int n, result;
 	std::cin >> n;
