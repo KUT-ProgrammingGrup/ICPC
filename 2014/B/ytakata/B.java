@@ -68,7 +68,9 @@ class B {
       int yto = board.length - 1;
       for (int y = board.length - 1; y >= 0; y--) {
         if (board[y][x] > 0) {
-          board[yto--][x] = board[y][x];
+          int tmp = board[y][x];
+          board[y][x] = 0;
+          board[yto--][x] = tmp;
         }
       }
     }
