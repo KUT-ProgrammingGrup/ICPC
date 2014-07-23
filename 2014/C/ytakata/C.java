@@ -14,7 +14,7 @@ class C {
         int h  = scanner.nextInt(); // 区間の高さ
         setHeight(x1, x2, h);
       }
-      System.out.println(solve(r));
+      System.out.printf("%.4f\n", solve(r));
     }
   }
 
