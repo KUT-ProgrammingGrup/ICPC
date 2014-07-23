@@ -79,7 +79,7 @@ int main(void) {
 			}
 		}
 
-		cout << solve(h, cols);
+		cout << solve(h, cols) << endl;
 	}
 
 	return 0;
